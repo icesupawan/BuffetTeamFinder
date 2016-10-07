@@ -2,8 +2,11 @@ package com.example.natthanan.buffetteamfinder;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -18,15 +21,14 @@ public class ChooseDealActivity extends AppCompatActivity {
     private Spinner amountSpinner;
     private Spinner timeSpinner;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_deal);
 
-        // Toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(R.string.app_name);
 
         // Search
         Intent searchIntent = getIntent();
@@ -50,8 +52,12 @@ public class ChooseDealActivity extends AppCompatActivity {
         adapterTime.setDropDownViewResource(R.layout.spinner_dropdown_item);
         timeSpinner.setAdapter(adapterTime);
 
+        // CardView
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.choose_deal_list_recycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
+        recyclerView.setAdapter(new DealRecyclerAdapter());
     }
 
     // Menu
@@ -78,4 +84,5 @@ public class ChooseDealActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

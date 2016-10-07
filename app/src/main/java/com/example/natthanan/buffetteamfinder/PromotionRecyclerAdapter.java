@@ -15,7 +15,7 @@ public class PromotionRecyclerAdapter extends RecyclerView.Adapter<PromotionRecy
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_child, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.promotion_recycler_child, parent, false));
     }
 
     @Override
