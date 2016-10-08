@@ -1,12 +1,15 @@
 package com.example.natthanan.buffetteamfinder;
 
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.InputStream;
 
 /**
  * Created by Natthanan on 10/4/2016.
@@ -20,8 +23,13 @@ public class PromotionRecyclerAdapter extends RecyclerView.Adapter<PromotionRecy
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-        holder.promotionLabel.setText("promotion ".concat(Integer.toString(position+1)));
+        Database db = new Database();
+        InputStream in = db.openHttpConnection("http://192.168.1.106/buffet/index.php");
+        if(in != null){
+            System.out.println("TEST");
+        }
+//        holder.promotionLabel.setText(test);
+//        holder.promotionLabel.setText("promotion ".concat(Integer.toString(position+1)));
         switch (position+1) {
             case 1:
                 holder.promotionImage.setImageResource(R.drawable.promo_1);

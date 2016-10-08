@@ -1,32 +1,40 @@
 package com.example.natthanan.buffetteamfinder;
 
 import android.app.SearchManager;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ChooseDealActivity extends AppCompatActivity {
+public class ChooseDealActivity extends AppCompatActivity implements CreateDealDialog.Communicator {
 
     Toolbar toolbar;
     private Spinner amountSpinner;
     private Spinner timeSpinner;
-
+    Communicator communicator;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_deal);
 
+        // Toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -58,6 +66,17 @@ public class ChooseDealActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerView.setAdapter(new DealRecyclerAdapter());
+
+        // Fab button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getSupportFragmentManager();
+                CreateDealDialog createDealDialog = new CreateDealDialog();
+                createDealDialog.show(manager, "dialog");
+            }
+        });
     }
 
     // Menu
@@ -85,4 +104,14 @@ public class ChooseDealActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Get data from create deal form
+    @Override
+    public void onDialogMessage(String restaurant, String branch, String time, String promotion, int amount) {
+
+        Toast.makeText(this, restaurant + "\n" + branch + "\n" + time + "\n" + promotion + "\n" + Integer.toString(amount) + "\n", Toast.LENGTH_LONG).show();
+    }
+
+    interface Communicator {
+        public void onDialogMessage(String restaurant, String branch, String time, String promotion, int amount);
+    }
 }
