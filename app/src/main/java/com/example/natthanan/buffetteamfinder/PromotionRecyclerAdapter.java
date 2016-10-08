@@ -23,11 +23,7 @@ public class PromotionRecyclerAdapter extends RecyclerView.Adapter<PromotionRecy
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Database db = new Database();
-        InputStream in = db.openHttpConnection("http://192.168.1.106/buffet/index.php");
-        if(in != null){
-            System.out.println("TEST");
-        }
+
 //        holder.promotionLabel.setText(test);
 //        holder.promotionLabel.setText("promotion ".concat(Integer.toString(position+1)));
         switch (position+1) {
