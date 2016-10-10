@@ -48,13 +48,13 @@ public class DealRecyclerAdapter extends RecyclerView.Adapter<DealRecyclerAdapte
 
 //            promotionImage = (ImageView) itemView.findViewById(R.id.promotionImage);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), ChooseDealActivity.class);
-                    view.getContext().startActivity(intent);
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent intent = new Intent(view.getContext(), ChooseDealActivity.class);
+//                    view.getContext().startActivity(intent);
+//                }
+//            });
         }
     }
 }

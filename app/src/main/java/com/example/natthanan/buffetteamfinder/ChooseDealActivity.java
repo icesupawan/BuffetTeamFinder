@@ -44,6 +44,7 @@ public class ChooseDealActivity extends AppCompatActivity implements CreateDealD
 
             String query = searchIntent.getStringExtra(SearchManager.QUERY);
             Toast.makeText(ChooseDealActivity.this, query, Toast.LENGTH_SHORT).show();
+
         }
 
         // Filter Zoneeeeee
@@ -85,9 +86,13 @@ public class ChooseDealActivity extends AppCompatActivity implements CreateDealD
 
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
-        SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        MenuItem searchItem = menu.findItem(R.id.menu_search);
+        android.widget.SearchView searchView = (android.widget.SearchView) searchItem.getActionView();
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setIconifiedByDefault(false);
+//        searchView.requestFocus();
 
         return super.onCreateOptionsMenu(menu);
     }

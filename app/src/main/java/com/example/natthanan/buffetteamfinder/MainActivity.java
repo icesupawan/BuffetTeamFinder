@@ -1,13 +1,18 @@
 package com.example.natthanan.buffetteamfinder;
 
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
+//import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -29,12 +34,14 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle(R.string.app_name);
 
         // Search
+        SearchView seearchView = (SearchView) findViewById(R.id.menu_search);
         Intent searchIntent = getIntent();
         if (Intent.ACTION_SEARCH.equals(searchIntent.getAction())) {
 
             String query = searchIntent.getStringExtra(SearchManager.QUERY);
             Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
         }
+
 
         // Tab
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -95,9 +102,16 @@ public class MainActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
-        SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        MenuItem searchItem = menu.findItem(R.id.menu_search);
+        android.widget.SearchView searchView = (android.widget.SearchView) searchItem.getActionView();
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setIconifiedByDefault(false);
+//        searchView.requestFocus();
+
+
+
 
         return super.onCreateOptionsMenu(menu);
     }
