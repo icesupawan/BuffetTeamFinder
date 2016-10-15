@@ -76,7 +76,7 @@ public class CreateDealDialog extends DialogFragment {
         }
     }
     interface Communicator {
-        public void onDialogMessage(String restaurant, String branch, String time, String promotion, int amount);
+        void onDialogMessage(String restaurant, String branch, String time, String promotion, int amount);
     }
 }
 

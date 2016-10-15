@@ -1,11 +1,9 @@
 package com.example.natthanan.buffetteamfinder;
 
 import android.app.SearchManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,21 +11,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ChooseDealActivity extends AppCompatActivity implements CreateDealDialog.Communicator {
+public class ChooseDealActivity extends AppCompatActivity implements CreateDealDialog.Communicator, DealInformationDialog.Communicator, LoginDialog.Communicator{
 
     Toolbar toolbar;
     private Spinner amountSpinner;
     private Spinner timeSpinner;
-    Communicator communicator;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -114,6 +109,15 @@ public class ChooseDealActivity extends AppCompatActivity implements CreateDealD
     public void onDialogMessage(String restaurant, String branch, String time, String promotion, int amount) {
 
         Toast.makeText(this, restaurant + "\n" + branch + "\n" + time + "\n" + promotion + "\n" + Integer.toString(amount) + "\n", Toast.LENGTH_LONG).show();
+    }
+
+    public void onDialogMessage(int available, String restaurant, String time, String name){
+        Toast.makeText(this, available + "\n" + restaurant + "\n" + time + "\n" + name, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onDialogMessage(String email, String password) {
+        Toast.makeText(this, "test", Toast.LENGTH_SHORT);
     }
 
     interface Communicator {
