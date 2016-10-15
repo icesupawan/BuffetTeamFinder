@@ -1,9 +1,6 @@
 package com.example.natthanan.buffetteamfinder;
 
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -12,20 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by Tastomy on 10/8/2016 AD.
  */
 
 public class DealRecyclerAdapter extends RecyclerView.Adapter<DealRecyclerAdapter.ViewHolder> {
-
-    Context context;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -71,9 +63,14 @@ public class DealRecyclerAdapter extends RecyclerView.Adapter<DealRecyclerAdapte
             joinDeal.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    LoginDialog loginDialog = new LoginDialog();
-                    FragmentManager fm = ((FragmentActivity)itemView.getContext()).getSupportFragmentManager();
-                    loginDialog.show(fm, "test");
+                    if(LoginFragment.getLogInFlag() == false) {
+                        Intent intent = new Intent(itemView.getContext(), LoginHomeActivity.class);
+                        itemView.getContext().startActivity(intent);
+                    }else{
+                        DealInformationDialog dialog = new DealInformationDialog();
+                        FragmentManager fm = ((FragmentActivity) itemView.getContext()).getSupportFragmentManager();
+                        dialog.show(fm, "TEST");
+                    }
                 }
             });
 

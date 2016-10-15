@@ -20,6 +20,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return HomeFragment.newInstance();
         } else if (position == 1) {
+            if (LoginFragment.getLogInFlag() == false){
+                return GoLoginFragment.newInstance();
+            }
             return ProfileFragment.newInstance();
         }
 

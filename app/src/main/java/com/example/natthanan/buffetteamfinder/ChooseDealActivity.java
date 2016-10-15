@@ -4,12 +4,10 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ChooseDealActivity extends AppCompatActivity implements CreateDealDialog.Communicator, DealInformationDialog.Communicator, LoginDialog.Communicator{
+public class ChooseDealActivity extends AppCompatActivity implements CreateDealDialog.Communicator, DealInformationDialog.Communicator{
 
     Toolbar toolbar;
     private Spinner amountSpinner;
@@ -113,14 +111,5 @@ public class ChooseDealActivity extends AppCompatActivity implements CreateDealD
 
     public void onDialogMessage(int available, String restaurant, String time, String name){
         Toast.makeText(this, available + "\n" + restaurant + "\n" + time + "\n" + name, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onDialogMessage(String email, String password) {
-        Toast.makeText(this, "test", Toast.LENGTH_SHORT);
-    }
-
-    interface Communicator {
-        public void onDialogMessage(String restaurant, String branch, String time, String promotion, int amount);
     }
 }
